@@ -10,7 +10,14 @@ filename = os.path.join(dirname, 'Web_of_science_search_results.csv')
 # Read in the web of science coded CSV
 df = pd.read_csv(filename)
 
+# Split authors on semi-colons (and spaces to remove leading split)
+def split_authors(author_string):
+    if isinstance (author_string,str):
+        return author_string.split(';')
 
+
+#Assign author_list
+df['author_list'] = df['Author Full Names'].apply(split_authors)
 
 
 # Only select articles that meet criteria (human-coded as hippocampal data)
@@ -87,4 +94,5 @@ output1_df['corres_author'] = output1_df.index
 output1_df.reset_index(inplace=True)
 output1_df.drop(columns='index',inplace=True)
 
+#output csv file
 output1_df.to_csv(r'output_search_results.csv',index=False)
