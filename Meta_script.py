@@ -79,6 +79,9 @@ df['last_author'] = df['author_list'].apply(last_author)
 # Only select articles that meet criteria (human-coded as hippocampal data)
 df = df[df['Meets Criteria?'] == 'Y']
 
+# Only select articles that also meet the second round of reviews
+df = df[df['Meets Criteria 2'] == 'Y']
+
 # %%
 
 # This creates the dataframe from which we will generate emails
@@ -113,4 +116,4 @@ output_df.reset_index(inplace=True)
 output_df.drop(columns='index',inplace=True)
 
 # Output dataframe to CSV
-output_df.to_csv(r'Z:\Documents\SCANN_Lab\MetaAnalysis\hippo_vol_meta\Results.csv')
+output_df.to_csv(r'Z:\Documents\SCANN_Lab\MetaAnalysis\hippo_vol_meta\Results2.csv')
